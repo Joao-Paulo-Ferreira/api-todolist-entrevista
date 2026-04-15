@@ -6,6 +6,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -29,6 +30,16 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ErroPadrao> handleRuntimeException(RuntimeException ex) {
         ErroPadrao erro = new ErroPadrao(LocalDateTime.now(), HttpStatus.NOT_FOUND.value(), ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErroPadrao> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
+        ErroPadrao erro = new ErroPadrao(
+                LocalDateTime.now(), 
+                HttpStatus.CONFLICT.value(), 
+                "Erro de integridade de dados: a operação violou uma restrição do banco de dados."
+        );
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
     }
 
     @ExceptionHandler(IllegalStateException.class)
