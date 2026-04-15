@@ -46,11 +46,11 @@ public class TarefaService {
     public Tarefa concluirTarefa(Long id) {
         Tarefa tarefa = buscarPorId(id);
 
-        if (tarefa.getSituacao() == SituacaoTarefa.CONCLUIDA) {
+        if (tarefa.getSituacao() == SituacaoTarefa.CONCLUIDO) {
             throw new IllegalStateException("Esta tarefa já se encontra concluída.");
         }
 
-        tarefa.setSituacao(SituacaoTarefa.CONCLUIDA);
+        tarefa.setSituacao(SituacaoTarefa.CONCLUIDO);
         return tarefaRepository.save(tarefa);
     }
 

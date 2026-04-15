@@ -14,6 +14,6 @@ import java.util.List;
 public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
     Page<Tarefa> findBySituacao(SituacaoTarefa situacao, Pageable pageable);
 
-    @Query("SELECT t FROM Tarefa t WHERE t.dataConclusaoPrevista < CURRENT_TIMESTAMP AND t.situacao <> 'CONCLUIDA'")
+    @Query("SELECT t FROM Tarefa t WHERE t.dataConclusaoPrevista < CURRENT_TIMESTAMP AND t.situacao <> 'CONCLUIDO'")
     List<Tarefa> encontrarTarefasAtrasadas();
 }

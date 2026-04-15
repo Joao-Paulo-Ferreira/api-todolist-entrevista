@@ -40,7 +40,7 @@ class TarefaServiceTest {
         Tarefa tarefaConcluida = tarefaService.concluirTarefa(idTarefa);
 
         assertNotNull(tarefaConcluida);
-        assertEquals(SituacaoTarefa.CONCLUIDA, tarefaConcluida.getSituacao());
+        assertEquals(SituacaoTarefa.CONCLUIDO, tarefaConcluida.getSituacao());
     }
 
     @Test
@@ -49,7 +49,7 @@ class TarefaServiceTest {
         Long idTarefa = 2L;
         Tarefa tarefaJaConcluida = new Tarefa();
         tarefaJaConcluida.setId(idTarefa);
-        tarefaJaConcluida.setSituacao(SituacaoTarefa.CONCLUIDA);
+        tarefaJaConcluida.setSituacao(SituacaoTarefa.CONCLUIDO);
 
         Mockito.when(tarefaRepository.findById(idTarefa)).thenReturn(Optional.of(tarefaJaConcluida));
 
